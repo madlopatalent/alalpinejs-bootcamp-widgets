@@ -71,6 +71,9 @@ function greetData() {
             this.greeting = this.greet(this.name, this.selectedLanguage);
         },
         greet(friendName, lang) {
+            if (typeof friendName !== 'string' || !isNaN(friendName)) {
+                return "Invalid name";
+            }
             const greetings = {
                 en: "Hello, " + friendName,
                 xi: "Avuxeni, " + friendName,
@@ -82,6 +85,7 @@ function greetData() {
         }
     };
 }
+
 function phoneBillData() {
     return {
         phoneString: '',
@@ -90,7 +94,7 @@ function phoneBillData() {
             this.totalBill = this.totalPhoneBill(this.phoneString);
         },
         totalPhoneBill(data) {
-            const network = data.split(',');
+            const network = data.toLowerCase().split(',');
             let smsCount = 0;
             let callCount = 0;
 
